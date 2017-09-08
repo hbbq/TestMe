@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Reflection;
+using TestMe;
 using Xunit;
 
 namespace ExampleLibrary
@@ -13,9 +11,9 @@ namespace ExampleLibrary
 
         [Theory]
         [MemberData(nameof(GetTests))]
-        public void Test(string description, params object[] parameters) => TestMe.Engine.DoTest(Assembly.GetExecutingAssembly(), parameters);
+        public void Test(string description, params object[] parameters) => Engine.DoTest(parameters);
 
-        public static IEnumerable<object[]> GetTests => TestMe.Engine.GetTestMethods(Assembly.GetExecutingAssembly());
+        public static IEnumerable<object[]> GetTests() => Engine.GetTestMethods(Assembly.GetExecutingAssembly());
 
     }
 
